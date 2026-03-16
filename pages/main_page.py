@@ -2,9 +2,16 @@ import allure
 
 from locators.general_locators import GeneralLocators
 from locators.main_page_locators import MainPageLocators
-from pages.general_page import GeneralPage
+from pages.base_page import BasePage
+from utils.constants import Urls
 
-class MainPage(GeneralPage):
+class MainPage(BasePage):
+    @allure.step('Перейти по адресу.')
+    def open_page(self, url=None):
+        if url is None:
+            url = Urls.BASE_URL
+        return self.driver.get(url)
+
     @allure.step('Принять куки.')
     def click_cookies_accept_button(self):
         try:
@@ -28,7 +35,7 @@ class MainPage(GeneralPage):
 
     @allure.step('Проверить наличие ответа на вопрос.')
     def check_dropdown_answer(self, text, question_number):
-        assert self.find_visible_element(MainPageLocators.dropdown_answer(text, question_number)).is_displayed()
+        return self.find_visible_element(MainPageLocators.dropdown_answer(text, question_number)).is_displayed()
 
     @allure.step('Нажали на лого самоката.')
     def click_scooter_logo(self):
@@ -36,7 +43,7 @@ class MainPage(GeneralPage):
 
     @allure.step('Проверка возврата на главную страницу.')
     def check_base_url(self, url):
-        assert self.check_url(url)
+        return self.check_url(url)
 
     @allure.step('Нажали на лого Yandex.')
     def click_yandex_logo(self):
@@ -45,4 +52,4 @@ class MainPage(GeneralPage):
     @allure.step('Проверка нового окна редиректа.')
     def check_new_window(self, url):
         new_window_url = self.get_new_window_url()
-        assert url in new_window_url
+        return url in new_window_url

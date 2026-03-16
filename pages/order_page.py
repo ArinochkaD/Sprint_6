@@ -2,10 +2,10 @@ import allure
 
 from locators.general_locators import GeneralLocators
 from locators.order_page_locators import OrderPageLocators
-from pages.general_page import GeneralPage
+from pages.base_page import BasePage
 from tests.order_data import ScooterColor
 
-class OrderPage(GeneralPage):
+class OrderPage(BasePage):
     @allure.step('Ввели имя.')
     def enter_first_name(self, name):
         return self.find_element(OrderPageLocators.FIRST_NAME_TEXT_INPUT).send_keys(name)
@@ -62,4 +62,4 @@ class OrderPage(GeneralPage):
 
     @allure.step('Проверили успешное оформление заказа.')
     def check_success_order(self):
-        assert self.find_element(OrderPageLocators.SUCCESS_ORDER_TITLE).is_displayed()
+        return self.find_element(OrderPageLocators.SUCCESS_ORDER_TITLE).is_displayed()
