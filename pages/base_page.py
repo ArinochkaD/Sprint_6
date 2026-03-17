@@ -1,5 +1,3 @@
-import allure
-
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.action_chains import ActionChains
@@ -34,3 +32,6 @@ class BasePage:
         self.driver.switch_to.window(self.driver.window_handles[-1])
         wait.until(lambda driver: driver.current_url != "about:blank")
         return self.driver.current_url
+
+    def force_click_element(self, element):
+        return self.driver.execute_script("arguments[0].click();", element)

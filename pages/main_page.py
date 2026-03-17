@@ -14,10 +14,7 @@ class MainPage(BasePage):
 
     @allure.step('Принять куки.')
     def click_cookies_accept_button(self):
-        try:
-            self.find_element(GeneralLocators.COOKIES_ACCEPT_BUTTON).click()
-        except Exception:
-            print("Ошибка кнопки куки")
+        return self.find_element(GeneralLocators.COOKIES_ACCEPT_BUTTON).click()
     
     @allure.step('Нажать на кнопку «Заказать» вверху страницы.')
     def click_order_top_button(self):
@@ -31,7 +28,7 @@ class MainPage(BasePage):
     def click_dropdown_question(self, question_number):
         elements = self.find_elements(MainPageLocators.DROPDOWN_BUTTONS)
         element = elements[question_number]
-        return self.driver.execute_script("arguments[0].click();", element)
+        return self.force_click_element(element)
 
     @allure.step('Проверить наличие ответа на вопрос.')
     def check_dropdown_answer(self, text, question_number):

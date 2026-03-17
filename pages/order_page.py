@@ -3,7 +3,6 @@ import allure
 from locators.general_locators import GeneralLocators
 from locators.order_page_locators import OrderPageLocators
 from pages.base_page import BasePage
-from tests.order_data import ScooterColor
 
 class OrderPage(BasePage):
     @allure.step('Ввели имя.')
@@ -44,8 +43,7 @@ class OrderPage(BasePage):
         return elements[period_index].click()
 
     @allure.step('Заполнили цвет самоката.')
-    def select_scooter_color(self, scooter_color: ScooterColor):
-        locator = OrderPageLocators.BLACK_PEARL_COLOR if scooter_color == ScooterColor.BLACK_PEARL else OrderPageLocators.GRAY_HOPELESSNESS_COLOR
+    def select_scooter_color(self, locator):
         return self.find_clickable_element(locator).click()
 
     @allure.step('Заполнили комментарий.')
