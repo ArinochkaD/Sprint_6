@@ -7,10 +7,8 @@ from utils.constants import Urls
 
 class MainPage(BasePage):
     @allure.step('Перейти по адресу.')
-    def open_page(self, url=None):
-        if url is None:
-            url = Urls.BASE_URL
-        return self.driver.get(url)
+    def open_page(self, url=Urls.BASE_URL):
+        return self.open_url(url)
 
     @allure.step('Принять куки.')
     def click_cookies_accept_button(self):
